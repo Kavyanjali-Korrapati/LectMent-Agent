@@ -1,0 +1,33 @@
+# ── Core framework ────────────────────────────────────────────────────────────
+fastapi>=0.111.0
+uvicorn[standard]>=0.29.0
+python-multipart>=0.0.9
+pydantic>=2.7.0
+
+# ── IBM watsonx.ai ────────────────────────────────────────────────────────────
+ibm-watsonx-ai>=1.0.8
+
+# ── IBM Watson Speech-to-Text (optional — used when IBM_STT_API_KEY is set) ──
+ibm-watson>=7.0.1
+ibm-cloud-sdk-core>=3.19.0
+
+# ── YouTube transcript fetching ───────────────────────────────────────────────
+youtube-transcript-api>=0.6.2
+
+# ── Local audio transcription fallback (optional) ────────────────────────────
+# openai-whisper>=20231117
+
+# ── Environment variables ─────────────────────────────────────────────────────
+python-dotenv>=1.0.1
+
+# ── Rate limiting ─────────────────────────────────────────────────────────────
+slowapi>=0.1.9
+
+# ── Retry logic ───────────────────────────────────────────────────────────────
+tenacity>=8.3.0
+
+# ── Request caching ───────────────────────────────────────────────────────────
+cachetools>=5.3.3
+
+# ── Language detection ────────────────────────────────────────────────────────
+langdetect>=1.0.9
