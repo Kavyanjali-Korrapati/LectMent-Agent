@@ -1,15 +1,70 @@
 # LectMent 🎓
 
 > Drop a lecture — get a clean summary, key takeaways, and a practice quiz.
->
-> Built for non-native English speakers, neurodivergent students, and anyone who struggles with fast-talking professors.
 
 ---
 
-## Architecture
+## What This Repository Contains
+This repository contains a setup that documents how the AI agent was created using IBM tools. Inside, you'll find:
+
+. Explanation of the project and technologies used
+. Project File Structure/ Architecture
+. IBM Services used
+. Screenshots of the AI agent in action
+. Key files like agent instructions and learning    blocks
+. Final project presentation
+. Quick start questions used for user onboarding
+
+---
+## Explanation Of LectMent
+
+`` LectMent- Transforms lengthy lectures into structured, AI-powered study materials including summaries, notes, quizzes, flashcards, and revision sheets.
+ using AI Agent creates summarization using Transcript.
+       ``` Modes
+       . Study
+       . Cheat Sheets
+       . Quiz & Flashcards
+       . Summarize
+
+
+### Project Purpose
+
+LectMent is an intelligent educational platform designed to help students learn more effectively by converting boring lecture content into easy-to-understand study resources.
+
+Students can upload lecture transcripts, paste YouTube lecture links, or upload audio recordings. LectMent processes the content using Large Language Models (LLMs) to generate concise summaries, detailed study notes, quizzes, revision sheets, flashcards, and key takeaways.
+
+The goal is to reduce manual note-taking while improving revision efficiency and knowledge retention.
+
+### Agentic AI Workflow
+
+LectMent follows an Agentic AI architecture where multiple AI-driven components collaborate to process educational content.
+
+- Input Processing Agent
+- Content Understanding Agent
+- Study Material Generation Agent
+- Response Management Agent
+
+This modular workflow enables efficient content analysis and personalized study material generation.
+
+### Features
+
+- 📄 Lecture Transcript Analysis
+- 📺 YouTube Lecture Analysis
+- 🎙 Audio Lecture Transcription
+- 📝 AI-generated Study Notes
+- 📚 Revision Sheets
+- ❓ Quiz Generation
+- 🧠 Flashcards
+- 📌 Key Takeaways
+- ⚡ FastAPI Backend
+- 🤖 IBM watsonx.ai Integration
+
+---
+
+## File Structure
 
 ```
-lectment/
+LectMent/
 ├── backend/                   # Python — FastAPI
 │   ├── main.py                # App entry point
 │   ├── routers/
@@ -35,6 +90,34 @@ lectment/
 ├── requirements.txt
 └── .env.example
 ```
+###  System Architecture
+
+User
+ │
+ ▼
+React Frontend
+ │
+ ▼
+FastAPI Backend
+ │
+ ├───────────────┐
+ │               │
+ ▼               ▼
+Transcript   Audio STT
+Processing    Processing
+ │               │
+ └───────┬───────┘
+         ▼
+ Prompt Engineering
+         ▼
+ IBM watsonx.ai
+ Foundation Model
+         ▼
+ AI Output
+         ▼
+ Summary • Quiz
+ Flashcards
+ Notes
 
 ---
 
@@ -46,14 +129,66 @@ lectment/
 | **watsonx Orchestrate** *(optional)* | Route prompts through skill flows | [ibm.com/products/watsonx-orchestrate](https://www.ibm.com/products/watsonx-orchestrate) → Settings → API |
 | **Watson Speech-to-Text** *(optional)* | Transcribe audio uploads | [cloud.ibm.com](https://cloud.ibm.com) → STT service → Credentials |
 
+
+| IBM Technology        | Purpose                                                        |
+| --------------------- | -------------------------------------------------------------- |
+| IBM BOB               | Designed and orchestrated AI agent workflow                    |
+| IBM watsonx.ai        | Executes Foundation Models                                     |
+| IBM Foundation Models | Understands lecture content and generates educational material |
+| IBM Watson STT        | Converts uploaded audio into text                              |
+| IBM Orchestrate       | Optional orchestration of AI workflows                         |
+| IBM Cloud             | Cloud infrastructure and AI services                           |
+
+
 ---
 
-## Local Development
+### Tech-Stack
+**Frontend** - React, Vite, HTML5, CSS3, JavaScript(ES6+)
+**backend** - Python, Cloud, Numpy, FastAPI, Uvicorn
+**Tools** - Speech To Text API
+**Libraries** - ibm-watsonx-ai, python-dotenv, youtube-transcript-api, cachetools, slowapi, tenacity, langdetect
+
+---
+## API Endpoints
+Method	Endpoint	Description
+POST	/api/analyze/text	Analyze transcript
+POST	/api/analyze/youtube	Analyze YouTube lecture
+POST	/api/analyze/audio	Analyze uploaded audio
+
+---
+
+## Screenshots
+
+
+<table>
+  <tr>
+    <td align="center">
+      <img src="screenshots/home.png" width="450"/>
+      <br><b>Home Page</b>
+    </td>
+    <td align="center">
+      <img src="screenshots/youtube.png" width="450"/>
+      <br><b>YouTube Analysis</b>
+    </td>
+  </tr>
+</table>
+
+## How the IBM Orchestrate integration works
+
+When `ORCHESTRATE_API_KEY`, `ORCHESTRATE_INSTANCE_URL`, and `ORCHESTRATE_SKILL_FLOW_ID` are all set, every Granite prompt is **routed through your IBM Orchestrate skill flow** instead of calling Granite directly.
+
+The skill flow receives `{ "input": "<full prompt>" }` and must return `{ "output": "<generated text>" }`.  
+This lets you chain additional Orchestrate skills (e.g. translation, grading, accessibility rewriting) before or after the Granite call — without changing any application code.
+
+If any of the three Orchestrate env vars are empty the system silently falls back to calling **Granite directly via the ibm-watsonx-ai SDK**.
+
+
+## Local Development / Run at your End
 
 ### 1 — Clone and install
 
 ```bash
-git clone <your-repo-url>
+git clone <-repo-url>
 cd lectment
 ```
 
@@ -86,17 +221,17 @@ python start.py
 uvicorn backend.main:app --reload --port 8000
 ```
 
-> ⚠️ **Common mistake:** If you `cd backend` first and then run uvicorn you will get
-> `ModuleNotFoundError: No module named 'backend'`
-> Always run from the **repo root** (`LectureAgent/` folder).
+> 
+> ``
+> 
 
-API docs auto-generated at http://localhost:8000/docs
+
 
 ### 3 — Frontend (Node ≥ 18)
 
 Open a **second terminal**, also from the repo root:
 
-```bash
+``` bash
 cd frontend
 npm install
 npm run dev
@@ -106,7 +241,7 @@ Open http://localhost:5173 — Vite proxies `/api` calls to `http://localhost:80
 
 ---
 
-## Environment Variables
+##  🔐 Environment Variables
 
 See [`.env.example`](.env.example) for the full list.
 
@@ -121,9 +256,31 @@ See [`.env.example`](.env.example) for the full list.
 | `IBM_STT_API_KEY` | optional | Watson STT key (leave blank → uses local Whisper) |
 | `IBM_STT_URL` | optional | Watson STT service URL |
 
+
+
+---
+ #### Replace in .env file in the project root.
+
+```Required variables:
+
+WATSONX_API_KEY
+WATSONX_PROJECT_ID
+WATSONX_URL
+WATSONX_MODEL_ID 
+````
+
+``` Optional:
+
+ORCHESTRATE_API_KEY
+ORCHESTRATE_INSTANCE_URL
+ORCHESTRATE_SKILL_FLOW_ID
+IBM_STT_API_KEY
+IBM_STT_URL
+```
+
 ---
 
-## Deployment (no Docker)
+## Deployment 
 
 ### Option A — Railway
 
@@ -179,12 +336,15 @@ VITE_API_BASE=https://lectment-api.fly.dev npm run build
 ```
 
 ---
+## Contributors
 
-## How the IBM Orchestrate integration works
+Developed by Kavyanjali Korrapati
 
-When `ORCHESTRATE_API_KEY`, `ORCHESTRATE_INSTANCE_URL`, and `ORCHESTRATE_SKILL_FLOW_ID` are all set, every Granite prompt is **routed through your IBM Orchestrate skill flow** instead of calling Granite directly.
+---
+## License
 
-The skill flow receives `{ "input": "<full prompt>" }` and must return `{ "output": "<generated text>" }`.  
-This lets you chain additional Orchestrate skills (e.g. translation, grading, accessibility rewriting) before or after the Granite call — without changing any application code.
+>This project is released for educational and learning purposes.
+---
 
-If any of the three Orchestrate env vars are empty the system silently falls back to calling **Granite directly via the ibm-watsonx-ai SDK**.
+
+> > ⭐ If you found this project useful, consider giving the repository a star.

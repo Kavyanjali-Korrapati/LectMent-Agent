@@ -27,7 +27,7 @@ load_dotenv(_ROOT / ".env", override=False)
 log = logging.getLogger("lectment.watsonx")
 
 # ── Default Granite model (overridable via WATSONX_MODEL_ID env var) ──────────
-DEFAULT_MODEL_ID = "ibm/granite-13b-chat-v2"
+DEFAULT_MODEL_ID = "meta-llama/llama-3-3-70b-instruct"
 
 # ── Per-mode generation parameters ───────────────────────────────────────────
 #   Research uses sampling for richer, more varied output.
@@ -80,8 +80,8 @@ def _creds() -> dict:
     """Read credentials lazily — raises a clear error if missing."""
     api_key    = os.environ.get("WATSONX_API_KEY", "")
     project_id = os.environ.get("WATSONX_PROJECT_ID", "")
-    url        = os.environ.get("WATSONX_URL", "https://us-south.ml.cloud.ibm.com")
-    model_id   = os.environ.get("WATSONX_MODEL_ID", DEFAULT_MODEL_ID)
+    url        = os.environ.get("WATSONX_URL") or "https://us-south.ml.cloud.ibm.com"
+    model_id   = os.environ.get("WATSONX_MODEL_ID") or DEFAULT_MODEL_ID
     if not api_key:
         raise EnvironmentError(
             "WATSONX_API_KEY is not set. Copy .env.example to .env and fill in your key."
@@ -156,6 +156,11 @@ _RETRYABLE = (requests.HTTPError, ConnectionError, TimeoutError)
 )
 def _granite_generate(prompt: str, mode: str = "study") -> str:
     c = _creds()
+    print("=" * 50)
+    print("URL      :", c["url"])
+    print("PROJECT  :", c["project_id"])
+    print("MODEL    :", c["model_id"])
+    print("=" * 50)
     params = MODE_GEN_PARAMS.get(mode, _DEFAULT_GEN_PARAMS)
     log.info(
         "Calling Granite model=%s mode=%s decoding=%s max_tokens=%d prompt_len=%d",
