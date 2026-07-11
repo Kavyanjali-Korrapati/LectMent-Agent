@@ -23,7 +23,7 @@
 
 | Document | Description |
 |----------|-------------|
-| 📊 [Project Presentation](AICTE_Project_STU669b43f0030e91721451504.pdf) | Complete project presentation with architecture, workflow, IBM technologies, and demo |
+| 📊 [Project Presentation](AICTE_Project_STU669b43f0030e91721451504 .pdf) | Complete project presentation with architecture, workflow, IBM technologies, and demo |
 | 📑 [Problem Statement](Problem_Statement.pdf) | Official problem statement and project objectives |
 ---
 
