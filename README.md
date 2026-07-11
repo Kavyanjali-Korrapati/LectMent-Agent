@@ -17,7 +17,7 @@
 |  Backend API | [Open Backend](https://lectment-agent.up.railway.app) |
 |  API Documentation | [Swagger UI](https://lectment-agent.up.railway.app/docs) |
 |  Health Check | [Health Endpoint](https://lectment-agent.up.railway.app/health) |
-|
+
 ---
 
 ## What This Repository Contains
