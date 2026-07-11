@@ -158,20 +158,69 @@ POST	/api/analyze/audio	Analyze uploaded audio
 ---
 
 ## Screenshots
-
+```
 
 <table>
   <tr>
     <td align="center">
-      <img src="screenshots/home.png" width="450"/>
-      <br><b>Home Page</b>
+      <img src="screenshots/Homepage.png" width="750"/>
+      <br><b>Home - Input</b>
     </td>
     <td align="center">
-      <img src="screenshots/youtube.png" width="450"/>
-      <br><b>YouTube Analysis</b>
+      <img src="screenshots/KeyTakeaways.png" width="750"/>
+      <br><b>Key Takeaways</b>
+    </td>
+    <td align="center">
+      <img src="screenshots/AskAI.png" width="750"/>
+      <br><b> Ask AI in summary chat</b>
+    </td>
+    <td align="center">
+      <img src="screenshots/AudioFileUpload.png" width="750"/>
+      <br><b>Uploading Audio File</b>
+    </td>
+    <td align="center">
+      <img src="screenshots/Output.png" width="750"/>
+      <br><b>Analysis using Youtube Link</b>
+    </td>
+    <td align="center">
+      <img src="screenshots/OutputQuiz.png" width="750"/>
+      <br><b>Quiz Creation</b>
     </td>
   </tr>
+
 </table>
+```
+
+--- 
+
+```
+
+<table>
+
+  <tr>
+  <h2>Bob Usage</h2>
+  <td align="center">
+      <img src="screenshots/PrompttoBob.png" width="500"/>
+      <br><b>Prompt to Bob</b>
+    </td>
+    <td align="center">
+      <img src="screenshots/TodoList.png" width="500"/>
+      <br><b> </b>
+    </td>
+    <td align="center">
+      <img src="screenshots/BuildwithBob.png" width="500"/>
+      <br><b>Building with Bob</b>
+    </td>
+    <td align="center">
+      <img src="screenshots/BuildwithBob2.png" width="500"/>
+      <br><b>Project Setting</b>
+    </td>
+  </tr>
+
+</table>
+```
+------
+
 
 ## How the IBM Orchestrate integration works
 
