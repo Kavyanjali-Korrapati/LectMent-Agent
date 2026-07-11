@@ -19,6 +19,14 @@
 |  Health Check | [Health Endpoint](https://lectment-agent.up.railway.app/health) |
 
 ---
+## 📄 Project Documents
+
+| Document | Description |
+|----------|-------------|
+| 📊 [Project Presentation](docs/LectMent_Presentation.pdf) | Complete project presentation with architecture, workflow, IBM technologies, and demo |
+| 📑 [Problem Statement](docs/Problem_Statement.pdf) | Official problem statement and project objectives |
+---
+
 
 ## What This Repository Contains
 This repository contains a setup that documents how the AI agent was created using IBM tools. Inside, you'll find:
