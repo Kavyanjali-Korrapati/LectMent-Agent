@@ -4,7 +4,6 @@
  */
 
 const BASE = import.meta.env.VITE_API_BASE ?? "";
-
 /**
  * Parse the response body safely — never throws on non-JSON bodies.
  * If the body is not JSON, returns a synthetic error object.
