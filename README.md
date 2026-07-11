@@ -1,7 +1,23 @@
 # LectMent 🎓
+![React](https://img.shields.io/badge/React-18-blue?logo=react)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.111-green?logo=fastapi)
+![IBM watsonx.ai](https://img.shields.io/badge/IBM-watsonx.ai-blue)
+![Python](https://img.shields.io/badge/Python-3.11+-yellow?logo=python)
+![License](https://img.shields.io/badge/License-Educational-orange)
 
 > Drop a lecture — get a clean summary, key takeaways, and a practice quiz.
 
+---
+
+## Live Demo
+
+| Service | Link |
+|---------|------|
+|  Frontend | [Open Frontend](https://lectment-assistant.up.railway.app) |
+|  Backend API | [Open Backend](https://lectment-agent.up.railway.app) |
+|  API Documentation | [Swagger UI](https://lectment-agent.up.railway.app/docs) |
+|  Health Check | [Health Endpoint](https://lectment-agent.up.railway.app/health) |
+|
 ---
 
 ## What This Repository Contains
@@ -29,7 +45,7 @@ This repository contains a setup that documents how the AI agent was created usi
 
 ### Project Purpose
 
-LectMent is an intelligent educational platform designed to help students learn more effectively by converting boring lecture content into easy-to-understand study resources.
+LectMent is an intelligent educational platform designed to help students learn more effectively by converting lengthy lecture content into structured study material.
 
 Students can upload lecture transcripts, paste YouTube lecture links, or upload audio recordings. LectMent processes the content using Large Language Models (LLMs) to generate concise summaries, detailed study notes, quizzes, revision sheets, flashcards, and key takeaways.
 
@@ -46,26 +62,30 @@ LectMent follows an Agentic AI architecture where multiple AI-driven components 
 
 This modular workflow enables efficient content analysis and personalized study material generation.
 
-### Features
+## Features
 
-- 📄 Lecture Transcript Analysis
-- 📺 YouTube Lecture Analysis
-- 🎙 Audio Lecture Transcription
-- 📝 AI-generated Study Notes
-- 📚 Revision Sheets
-- ❓ Quiz Generation
-- 🧠 Flashcards
-- 📌 Key Takeaways
-- ⚡ FastAPI Backend
-- 🤖 IBM watsonx.ai Integration
+### 📥 Input
+- Lecture Transcript
+- YouTube URL
+- Audio Upload
 
----
+### 🤖 AI Processing
+- AI Summarization
+- Study Notes
+- Quiz Generation
+- Flashcards
+- Key Takeaways
+
+### 🎯 Learning
+- Ask AI
+- Cheat Sheets
+- Revision Notes---
 
 ## File Structure
 
 ```
 LectMent/
-├── backend/                   # Python — FastAPI
+├── backend/        # Python — FastAPI   Handles AI processing, APIs, transcript extraction, and IBM integrations.
 │   ├── main.py                # App entry point
 │   ├── routers/
 │   │   └── analyze.py         # POST /api/analyze/{text,youtube,audio}
@@ -74,7 +94,7 @@ LectMent/
 │       ├── prompts.py         # Zero-shot prompt templates (Granite)
 │       ├── transcription.py   # IBM STT → Whisper fallback
 │       └── youtube_transcript.py
-├── frontend/                  # React 18 + Vite
+├── frontend/ # React 18 + Vite Provides the React-based user interface for uploading lectures
 │   ├── src/
 │   │   ├── App.jsx
 │   │   ├── api.js             # fetch wrappers
@@ -91,7 +111,7 @@ LectMent/
 └── .env.example
 ```
 ###  System Architecture
-
+```
 User
  │
  ▼
@@ -118,6 +138,17 @@ Processing    Processing
  Summary • Quiz
  Flashcards
  Notes
+```
+
+## 🏗 System Architecture & Workflow
+
+<p align="center">
+<img src="screenshots/Architecture.png" width="900">
+</p>
+ 
+<p align="center">
+<img src="screenshots/workflow.png" width="900">
+</p>
 
 ---
 
@@ -125,7 +156,7 @@ Processing    Processing
 
 | Service | Purpose | Where to get credentials |
 |---|---|---|
-| **watsonx.ai** (Granite 13B Chat v2) | Summarise, takeaways, quiz | [dataplatform.cloud.ibm.com](https://dataplatform.cloud.ibm.com) → Project → Manage → Access |
+| **watsonx.ai** meta-llama/llama-3-3-70b-instruct | Summarise, takeaways, quiz | [dataplatform.cloud.ibm.com](https://dataplatform.cloud.ibm.com) → Project → Manage → Access |
 | **watsonx Orchestrate** *(optional)* | Route prompts through skill flows | [ibm.com/products/watsonx-orchestrate](https://www.ibm.com/products/watsonx-orchestrate) → Settings → API |
 | **Watson Speech-to-Text** *(optional)* | Transcribe audio uploads | [cloud.ibm.com](https://cloud.ibm.com) → STT service → Credentials |
 
@@ -139,7 +170,9 @@ Processing    Processing
 | IBM Orchestrate       | Optional orchestration of AI workflows                         |
 | IBM Cloud             | Cloud infrastructure and AI services                           |
 
+### IBM BOB Integration
 
+LectMent was designed using IBM BOB to visually create and orchestrate the AI agent workflow. BOB was used to define prompts, configure agent behavior, and streamline the AI development process before integrating with the application.
 ---
 
 ### Tech-Stack
@@ -158,7 +191,7 @@ POST	/api/analyze/audio	Analyze uploaded audio
 ---
 
 ## Screenshots
-```
+
 
 <table>
   <tr>
@@ -170,6 +203,8 @@ POST	/api/analyze/audio	Analyze uploaded audio
       <img src="screenshots/KeyTakeaways.png" width="750"/>
       <br><b>Key Takeaways</b>
     </td>
+  </tr>
+  <tr>
     <td align="center">
       <img src="screenshots/AskAI.png" width="750"/>
       <br><b> Ask AI in summary chat</b>
@@ -178,6 +213,8 @@ POST	/api/analyze/audio	Analyze uploaded audio
       <img src="screenshots/AudioFileUpload.png" width="750"/>
       <br><b>Uploading Audio File</b>
     </td>
+  </tr>
+  <tr>
     <td align="center">
       <img src="screenshots/Output.png" width="750"/>
       <br><b>Analysis using Youtube Link</b>
@@ -189,16 +226,16 @@ POST	/api/analyze/audio	Analyze uploaded audio
   </tr>
 
 </table>
-```
+
 
 --- 
 
-```
+
 
 <table>
+  <h2>Bob Usage</h2>
 
   <tr>
-  <h2>Bob Usage</h2>
   <td align="center">
       <img src="screenshots/PrompttoBob.png" width="500"/>
       <br><b>Prompt to Bob</b>
@@ -207,6 +244,8 @@ POST	/api/analyze/audio	Analyze uploaded audio
       <img src="screenshots/TodoList.png" width="500"/>
       <br><b> </b>
     </td>
+  </tr>
+  <tr>
     <td align="center">
       <img src="screenshots/BuildwithBob.png" width="500"/>
       <br><b>Building with Bob</b>
@@ -218,8 +257,18 @@ POST	/api/analyze/audio	Analyze uploaded audio
   </tr>
 
 </table>
-```
-------
+
+---
+##  Future Enhancements
+
+- PDF lecture support
+- Multi-language summaries
+- OCR for handwritten notes
+- Student login and history
+- Cloud storage integration
+- Learning analytics dashboard
+
+---
 
 
 ## How the IBM Orchestrate integration works
@@ -331,7 +380,15 @@ IBM_STT_URL
 
 ## Deployment 
 
-### Option A — Railway
+
+The application is deployed as two Railway services:
+
+- Backend (FastAPI)
+- Frontend (React + Vite)
+
+Both services communicate securely using REST APIs.
+
+### Railway
 
 1. Push the repo to GitHub.
 2. Create a **New Project** on [railway.app](https://railway.app).
@@ -348,47 +405,16 @@ IBM_STT_URL
 - Start command: `npx serve dist -l $PORT`
 - Add env var: `VITE_API_BASE=https://<your-backend-railway-url>`
 
----
 
-### Option B — Render
-
-**Backend (Web Service)**
-- Environment: Python 3
-- Build command: `pip install -r requirements.txt`
-- Start command: `uvicorn backend.main:app --host 0.0.0.0 --port $PORT`
-- Add env vars in Render dashboard → Environment.
-
-**Frontend (Static Site)**
-- Root directory: `frontend`
-- Build command: `npm install && npm run build`
-- Publish directory: `frontend/dist`
-- Add env var: `VITE_API_BASE=https://<your-backend-render-url>`
 
 ---
 
-### Option C — Fly.io
+## Author
 
-**Backend**
-```bash
-cd <repo-root>
-fly launch --name lectment-api --no-deploy
-fly secrets set WATSONX_API_KEY=... WATSONX_PROJECT_ID=... WATSONX_URL=...
-fly deploy --dockerfile-ignore-file .gitignore \
-           --build-arg START_CMD="uvicorn backend.main:app --host 0.0.0.0 --port 8080"
-```
+**Kavyanjali Korrapati**
 
-**Frontend** — build locally and push to any static host (Netlify, Vercel, Cloudflare Pages):
-```bash
-cd frontend
-VITE_API_BASE=https://lectment-api.fly.dev npm run build
-# upload dist/ to your static host
-```
-
----
-## Contributors
-
-Developed by Kavyanjali Korrapati
-
+- GitHub: https://github.com/Kavyanjali-Korrapati
+- LinkedIn: https://www.linkedin.com/in/kavyanjali-korrapati-3a375232b
 ---
 ## License
 
