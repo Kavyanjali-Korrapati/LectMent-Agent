@@ -196,7 +196,7 @@ POST	/api/analyze/audio	Analyze uploaded audio
 <table>
   <tr>
     <td align="center">
-      <img src="screenshots/Homepage.png" width="750"/>
+      <img src="screenshots/Home page.png" width="750"/>
       <br><b>Home - Input</b>
     </td>
     <td align="center">
@@ -319,9 +319,6 @@ python start.py
 uvicorn backend.main:app --reload --port 8000
 ```
 
-> 
-> ``
-> 
 
 
 
@@ -422,4 +419,4 @@ Both services communicate securely using REST APIs.
 ---
 
 
-> > ⭐ If you found this project useful, consider giving the repository a star.
+>  ⭐ If you found this project useful, consider giving the repository a star.
